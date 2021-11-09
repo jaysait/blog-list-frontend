@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 const Blog = ({ blog, increaseBlogLike, deleteBlog, user }) => {
+  console.log('blog: ', blog);
   const [showMore, setShowMore] = useState(false);
   const blogStyle = {
     paddingTop: 10,
@@ -22,11 +23,13 @@ const Blog = ({ blog, increaseBlogLike, deleteBlog, user }) => {
       {showMore && (
         <div>
           <p className='url'>{blog.url}</p>
-          <strong className='likes'> likes {blog.likes}</strong>{' '}
-          <button onClick={increaseBlogLike}>like</button>
+          <strong className='likes'> likes {blog.likes}</strong>
+          <button id='like-button' onClick={increaseBlogLike}>
+            like
+          </button>
           <p className='author'>{blog.author}</p>
           {blog.user?.id === user?.id && (
-            <button value={blog.id} onClick={deleteBlog}>
+            <button id='delete-button' value={blog.id} onClick={deleteBlog}>
               remove
             </button>
           )}
