@@ -9,33 +9,23 @@ const Blog = ({ blog, increaseBlogLike, deleteBlog, user }) => {
     marginBottom: 5,
   };
   return (
-    <div style={blogStyle}>
-      {!showMore ? (
+    <div style={blogStyle} className='blog'>
+      <div>
+        <span className='title'>{blog.title}</span>
+        <button
+          onClick={() => {
+            setShowMore(!showMore);
+          }}>
+          {!showMore ? 'view' : 'hide'}
+        </button>
+      </div>
+      {showMore && (
         <div>
-          {blog.title}
-          <button
-            onClick={() => {
-              setShowMore(!showMore);
-            }}>
-            view
-          </button>
-        </div>
-      ) : (
-        <div>
-          {blog.title}
-          <button
-            onClick={() => {
-              setShowMore(!showMore);
-            }}>
-            hide
-          </button>
-          <br />
-          {blog.url}
-          <br />
-          likes {blog.likes} <button onClick={increaseBlogLike}>like</button>
-          <br /> {blog.author}
-          <br />
-          {blog.user.id === user.id && (
+          <p className='url'>{blog.url}</p>
+          <strong className='likes'> likes {blog.likes}</strong>{' '}
+          <button onClick={increaseBlogLike}>like</button>
+          <p className='author'>{blog.author}</p>
+          {blog.user?.id === user?.id && (
             <button value={blog.id} onClick={deleteBlog}>
               remove
             </button>
